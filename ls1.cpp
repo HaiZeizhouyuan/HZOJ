@@ -90,6 +90,7 @@ void do_ls(char *dir) {
         free(namelist);
     }
     printf("\n");
+    return ;
 }
 void output(char *filename,struct stat *st) {
     if (S_IXUSR & st->st_mode) {
