@@ -17,6 +17,7 @@
 #include <string.h>
 #include <math.h>
 #include <dirent.h>
+#include "head.h"
 void do_ls(char *);
 void show_info(char *, struct stat *);
 void output(char *, struct stat *);
@@ -37,7 +38,8 @@ int main(int argc, char **argv) {
                 exit(1);
         }
     }
-    do_ls(".");
+    DBG(GREEN"<Debug>"NO);
+    //do_ls(".");
     return 0;
 }
 
