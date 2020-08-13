@@ -13,14 +13,14 @@ int num[10] = {0, 1};
 
 void func(int x, int y, int n) {
     if (n == 1) {
-        ans[x][y] = 'x';
+        ans[x][y] = 'X';
         return ;
     }
-    func(x, y, n - 1);
-    func(x, y + num[n] / 3 * 2, n - 1);//左上
-    func(x + num[n] / 3 * 2, y, n - 1);//右上
-    func(x + num[n] / 3 * 2, y + num[n] / 3 * 2,  n - 1);//左下
-    func(x + num[n] / 3, y + num[n] / 3, n - 1);//右下
+    func(x, y, n - 1);//左上
+    func(x, y + num[n] / 3 * 2, n - 1);//右上
+    func(x + num[n] / 3 * 2, y, n - 1);//左下
+    func(x + num[n] / 3 * 2, y + num[n] / 3 * 2,  n - 1);//右下
+    func(x + num[n] / 3, y + num[n] / 3, n - 1);//中间
 }
 
 int main () {
@@ -41,8 +41,9 @@ int main () {
                     cout << " ";
                 }
             }
+            cout << endl;
         }
+        cout << "-" << endl;
     }
-    cout << endl;
     return 0;
 }

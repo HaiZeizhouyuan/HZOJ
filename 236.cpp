@@ -8,7 +8,7 @@
 #include<iostream>
 using namespace std;
 
-int n, m, num[15], cnt;
+int n, m, num[15], cnt = 1;
 
 void p() {
     for (int i = 1; i <= m; i++) {
@@ -18,6 +18,7 @@ void p() {
         cout << num[i];
     }
     cout << endl;
+    return ;
 }
 
 void func(int start, int left) {

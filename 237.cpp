@@ -29,7 +29,7 @@ void func(int left) {
     for (int i = 1; i <= n; i++){
         if (mark[i] == 0) {
             mark[i] = 1;
-            num[cnt ++] = i;
+            num[cnt++] = i;
             func(left - 1);
             cnt -= 1;
             mark[i] = 0;
