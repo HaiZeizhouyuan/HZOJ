@@ -1,12 +1,32 @@
 /*************************************************************************
 	> File Name: 382.cpp
-	> Author: 
+	> Author: zhouyuan
 	> Mail: 
-	> Created Time: Sat Jul 18 21:09:03 2020
+	> Created Time: 2020年08月20日 星期四 19时58分17秒
  ************************************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#define max_n 1000
-mZmZmZmZ
+#include<iostream>
+#include <queue>
+using namespace std;
+
+int n, m;
+queue<int> que;
+
+int main() {
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++) {
+        que.push(i);
+    }
+    while(n > 1) {
+        for (int i = 0; i < m - 1; i++) {
+            int f = que.front();
+            que.pop();
+            que.push(f);
+        }
+        que.pop();
+        n--;
+    }
+    cout << que.front() << endl;
+    return 0;
+}
+
