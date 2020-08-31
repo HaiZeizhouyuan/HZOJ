@@ -21,30 +21,28 @@ int num1[15], num2[15];
 int func(int *nums, int minn) {
     int ans = 0;
     for (int i = 0; i < 8; i++) {
-        if (nums[i] <= 8 && minn > nums[i]) ans += 1;
+        if (nums[i] <= r && minn > nums[i]) ans += 1;
     }
     return ans;
 }
 
 int main() {
     scanf("%d", &r);
-    while(1) {
+    for (int k = 0; k < 10; k++) {
         int min_a = max_r, min_b = max_r;
-        memset(num1, 0, sizeof(num1));
-        memset(num2, 0, sizeof(num2));
+        //memset(num1, 0, sizeof(num1));
+       // memset(num2, 0, sizeof(num2));
         for (int i = 0; i < 8; i++) {
-            scanf("%d", &num);
-            if (num == -1) {
+            scanf("%d", &num1[i]);
+            if (num1[i] == -1) {
                 printf("%d:%d\n", sum_a, sum_b);
                 return 0;
             }
-            num1[i] = num;
-            if (num < min_a) min_a = num;
+            if (num1[i] < min_a) min_a = num1[i];
         }
         for (int i = 0; i < 8; i++) {
-            scanf("%d", &num);
-            num2[i] = num;
-            if (num < min_b) min_b = num;
+            scanf("%d", &num2[i]);
+            if (num2[i] < min_b) min_b = num2[i];
         }
         if (min_a < min_b) {
             int re = func(num1, min_b);
@@ -58,6 +56,7 @@ int main() {
         }
         else printf("%d:%d\n", 0, 0);
     }
- 
+    printf("%d:%d\n", sum_a, sum_b);
+
     return 0;
 }
