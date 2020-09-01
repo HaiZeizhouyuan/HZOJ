@@ -9,7 +9,6 @@
 #include<stdlib.h>
 #include<string.h>
 #include<math.h>
-
 int n, num[100005][2], mmin, all;
 
 int main() {
