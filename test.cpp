@@ -7,34 +7,40 @@
 
 #include <iostream>
 #include <string>
+#include <cstdio>
 #include <algorithm>
 using namespace std;
-
-int max_all = 0, score_last, score_cri, num_write;
-string  max_name, name;
-char officer, west;
+long long num[100000000];
 int main() {
-    int n, ans = 0;
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> name >> score_last >> score_cri >> officer >> west >> num_write;
-        int temp = 0;
-        if (score_last > 80 && num_write >= 1) temp += 8000;
-        if (score_last > 85 && score_cri > 80) temp += 4000;
-        if (score_last > 90) temp += 2000;
-        if (score_last > 85 && west == 'Y') temp += 1000;
-        if (score_last > 80 && officer == 'Y') temp += 850;
-        if (temp > max_all) {
-            max_all = temp;
-            max_name = name;
+    long long  a, b, ans = 0;
+    cin >> a >> b;
+    for (int i = 0; i <= 9; i++) {
+        for (int j = 0; j <= 9; j++) {
+            if (i == j) continue;
+            for (int k = 3; k <= 17; k++) {
+                for (int l = 1; l <= k; l++) {
+                    if (l == 1 && j == 0) continue;
+                    if (l != 1 && i == 0) break;
+                    long long t = 0;
+                    for (int m = 1; m <= k; m++) {
+                        if (m == l) {
+                            t = t * 10 + j;
+                        } else {
+                            t = t * 10 + i;
+                        }
+                    }
+                    if (t >= a && t <= b) {
+						num[ans++] = t;
+					}
+                }
+            }
         }
-        ans += temp;       
     }
-    cout << max_name << endl;
-    cout << max_all << endl;
+    sort(num, num + ans);
+    for (int i = 0; i < ans; i++) {
+        printf("%d : %lld\n", i, num[i]);
+    }
     cout << ans << endl;
     return 0;
-
 }
- 
 

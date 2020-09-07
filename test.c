@@ -9,35 +9,37 @@
 #include<stdlib.h>
 #include<string.h>
 #include<math.h>
-int n, num[100005][2], mmin, all;
+#include<unistd.h>
 
 int main() {
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++) {
-        scanf("%d%d", &num[i][0], &num[i][1]);
-        if (i > 1) {
-            
-            all += abs(num[i][0] - num[i - 1][0]) +
-                    abs(num[i][1] - num[i - 1][1]);
-            printf("all[%d] = %d\n", i, all);
+    long long a, b, ans = 0;
+	scanf("%lld%lld", &a, &b);
+    for (int i = 0; i <= 9; i++) {
+        for (int j = 0; j <= 9; j++) {
+            if (i == j) continue;
+            for (int k = 3; k <= 17; k++) {
+                for (int l = 1; l <= k; l++) {
+                    if (l == 1 && j == 0) continue;
+                    if (l != 1 && i == 0) break;
+                    long long t = 0;
+                    for (int m = 1; m <= k; m++) {
+                        if (m == l) {
+                            t = t * 10 + j;
+                        } else {
+                            t = t * 10 + i;
+                        }
+                    }
+                    if (t >= a && t <= b) {
+                        printf("%lld\n", t);
+                        // sleep(1);
+                        ans++;
+
+                    }
+                }
+            }
         }
-                
     }
-    mmin = all;
-    printf("max = %d\n", mmin);
-    for (int i = 2; i < n; i++) {
-        int t = all;
-        t -= abs(num[i][0] - num[i - 1][0]) +
-            abs(num[i][1] - num[i - 1][1]) +
-            abs(num[i][0] - num[i + 1][0]) + 
-            abs(num[i][1] - num[i + 1][1]);
-        t += abs(num[i + 1][0] - num[i - 1][0]) +
-            abs(num[i + 1][1] - num[i - 1][1]);
-        if (t < mmin) {
-            mmin = t;
-        }
-        printf("%d\n", mmin);            
-    }
-    printf("%d\n", mmin);
+    printf("%lld\n", ans);
     return 0;
 }
+ 
