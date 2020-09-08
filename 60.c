@@ -1,10 +1,3 @@
-/*************************************************************************
-	> File Name: 60.c
-	> Author: 
-	> Mail: 
-	> Created Time: Sun Aug  9 21:55:27 2020
- ************************************************************************/
-
 #include<stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -31,6 +24,14 @@ void haizei_test() {
     return ;
 }
 
+double F(double x, double n) {
+    return x * x - n;
+}
+
+double f(double x) {
+    return 2 * x;
+}
+
 int main() {
     srand(time(0));
     haizei_test();
@@ -38,6 +39,9 @@ int main() {
 }
 
 double newton_sqrt(double n) {
-    //TODO
-
+    double x1 = n / 2.0;
+    while(fabs(F(x1, n)) > EPSLON) {
+        x1 -= F(x1, n) / f(x1);
+    }
+    return x1;
 }

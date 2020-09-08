@@ -11,26 +11,38 @@
 #include<math.h>
 #include<time.h>
 #include<unistd.h>
-#define max_n 1940500 
-int func(int l, int r) {
-    int sum = 0;
-    for (int i = l; i <= r; i++) {
-        sum += i;
+#define max_n 15000000
+
+long long sum[max_n + 5], a;
+
+void S() {
+    for (int i = 1; i <= max_n; i++) {
+        sum[i] = sum[i - 1] + i;
     }
-    return sum;
+    return ;
+}
+
+long long  func(long long n, long long k) {
+    return sum[n] - sum[k] - sum[k - 1];
 }
 
 int main() {
-    int a, flag = 0, n, k;
-    scanf("%d", &a);
-    for (n = a; n < max_n && !flag; n++) {
-        for (k = 2; k <= n && !flag; k++) {
-            int a = func(1, k - 1);
-            int b = func(k + 1, n);
-            if (n == 8) printf("n : %d, k : %d, func(1, k -1) : %d, func(k + 1, n) : %d\n",n, k, a, b);
-            if (a == b) flag = 1;
+    long long  l, r;
+    scanf("%lld", &a);
+    S();
+    for (long long  k = a; ; k++) {
+        l = k + 1, r = max_n;
+        while(l <= r) {
+            long long mid = (l + r) / 2;
+            long long flag = func(mid, k);
+            
+            if (flag == 0) {
+                printf("%lld %lld\n", k, mid);
+                return 0;
+            }
+            if (flag < 0) l = mid + 1;
+            else r = mid - 1;
         }
     }
-    printf("%d %d\n", k, n);
     return 0;
 }
