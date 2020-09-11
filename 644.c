@@ -51,26 +51,16 @@ int main () {
             case 1:{
                 scanf("%d", &tmp);
                 num[ans++] = tmp;
-               /* for (int i = 0; i < ans; i++) {
-                    printf("%d, ",num[i]);
-                }
-                printf("\n\n");*/
-                heap_sort(num, i + 1);
+                heap_sort(num, ans);
             } break;
             case 2:{
                 if (ans > 0) printf("%d\n", num[ans - 1]);
                 else printf("empty\n");
             } break;
             case 3: {
-                ans -= 2;
+                ans -= 1;
             } break;
         }
-        for(int i = 0; i < ans; i++) {
-            i && printf(", ");
-            printf("%d", num[i]);
-        }
-        printf("\n");
-       
     }
 
     return 0;
