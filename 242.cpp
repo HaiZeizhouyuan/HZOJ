@@ -17,7 +17,6 @@ int main(){
         cin >> num[i];
         if (num[i] >= m) sum += num[i];
     }
-    cout << 10 * sum << endl;
     
     return 0;
 }
