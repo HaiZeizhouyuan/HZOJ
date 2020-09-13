@@ -7,6 +7,7 @@
 
 #include<iostream>
 #include <algorithm>
+#include<cstdlib>
 using namespace std;
 #define max_n 100000
 #define max_l 100000000
