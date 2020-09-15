@@ -11,7 +11,7 @@ int y;
 
 int main() {
     scanf("%d", &y);
-    if((y / 4 == 0 && y / 100 != 0) || (y /400 == 0)) printf("L\n");
+    if((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) printf("L\n");
     else printf("N\n");
     return 0;
 }
