@@ -9,15 +9,17 @@
 using namespace std;
 
 int n, num[15], cnt = 1, mark[15];
-
+int sum = 0;
 
 void p() {
+    if (num[1] == 0) return ;
     for (int i = 1; i <= n; i++){
         if (i != 1) {
             cout << " ";
         }
         cout << num[i];
     }
+    sum += 1;
     cout << endl;
 }
 
@@ -26,7 +28,7 @@ void func(int left) {
         p();
         return ;
     }
-    for (int i = 1; i <= n; i++){
+    for (int i = 0; i <= n; i++){
         if (mark[i] == 0) {
             mark[i] = 1;
             num[cnt++] = i;
@@ -40,5 +42,6 @@ void func(int left) {
 int main () {
     cin >> n;
     func(n);
+    cout << sum << endl;
     return 0;
 }

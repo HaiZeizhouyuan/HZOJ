@@ -11,7 +11,7 @@ using namespace std;
 int n, m, cnt = 1, num[15], mark[15];
 
 void p() {
-    for (int i = 1; i <= m; i++) {
+    for (int i = 1; i <= n; i++) {
         if (i != 1) {
             cout << " ";
         }
@@ -25,7 +25,7 @@ void func(int left) {
         p();
         return ;
     }
-    for (int i = 1; i <= n; i++) {
+    for (int i = 0; i <= n; i++) {
         if (mark[i] == 0) {
             mark[i] = 1;
             num[cnt++] = i;
@@ -38,7 +38,7 @@ void func(int left) {
 }
 
 int main () {
-    cin >> n >> m;
-    func(m);
+    cin >> n;
+    func(n);
     return 0;
 }
