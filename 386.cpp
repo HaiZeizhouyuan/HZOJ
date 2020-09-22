@@ -13,8 +13,7 @@ using namespace std;
 int man[max_n + 5];
 int m, n;
 typedef struct Fruit{
-    int num;
-    int node;
+    int num, node;
 }Fruit;
 
 Fruit fruit[max_n +5];
@@ -22,7 +21,7 @@ Fruit fruit[max_n +5];
 int binary_search(int num) {
     int left = 0, right = m - 1, mid;
     while(left <= right) {
-        mid = (left + right) >> 1;
+        mid = (left + right) / 2;
        // printf("l: %d, r : %d, mid : %d, fruit : %d\n", left, right, mid, fruit[mid].num);
         if (fruit[mid].num ==  num)  return fruit[mid].node;
         if (fruit[mid].num < num) left = mid + 1;

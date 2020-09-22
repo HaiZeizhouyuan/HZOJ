@@ -23,7 +23,6 @@ int binary_search(int num) {
     int left = 0, right = m, mid;
     while(left < right) {
         mid = (left + right) >> 1;
-       // printf("l: %d, r : %d, mid : %d, fruit : %d\n", left, right, mid, fruit[mid].num);
         if (fruit[mid].num >= num) right = mid;
         if (fruit[mid].num < num) left = mid + 1;
     }
@@ -33,7 +32,6 @@ int binary_search(int num) {
 bool cmp(Fruit a, Fruit b) {
     return a.num < b.num;
 }
-
 
 int main() {
     scanf("%d%d", &m, &n);
@@ -46,8 +44,5 @@ int main() {
         scanf("%d", &man[i]);
         printf("%d\n", binary_search(man[i]));
     }
-
-
-
     return 0;
 }
