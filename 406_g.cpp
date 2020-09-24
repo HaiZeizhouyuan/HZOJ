@@ -16,8 +16,8 @@ struct node {
     int x, y;
 };
 
-int n, m, mmap[105][105], ans;
-int dir[4][2] = {0, -1, 0, 1, 1, 0, -1, 0};
+int n, m, mmap[2005][2005], ans;
+int dir[8][2] = {0, -1, 0, 1, 1, 0, -1, 0, 1, 1, 1, -1, -1, 1, -1, -1};
 
 int main() {
     cin >> n >> m;
