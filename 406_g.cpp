@@ -34,15 +34,15 @@ int main() {
                 ans++;
                 queue<node> que;
                 que.push((node){i, j});
-                mmap[i][j] = 0;
+                mmap[i][j] = '.';
                 while(!que.empty()) {
                     node tmp = que.front();
                     que.pop();
-                    for (int k = 0; k < 4; k++) {
+                    for (int k = 0; k < 8; k++) {
                         int x =  tmp.x + dir[k][0];
                         int y = tmp.y + dir[k][1];
                         if (mmap[x][y] == '#') {
-                            mmap[x][y] = 0;
+                            mmap[x][y] = '.';
                             que.push((node){x, y});
                         }
                     }
