@@ -16,7 +16,8 @@ struct node {
     int x, y;
 };
 
-int n, m, mmap[2005][2005], ans;
+int n, m, ans;
+char mmap[2005][2005];
 int dir[8][2] = {0, -1, 0, 1, 1, 0, -1, 0, 1, 1, 1, -1, -1, 1, -1, -1};
 
 int main() {
@@ -29,7 +30,7 @@ int main() {
 
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
-            if (mmap[i][j] != 0) {
+            if (mmap[i][j] == '#') {
                 ans++;
                 queue<node> que;
                 que.push((node){i, j});
@@ -40,7 +41,7 @@ int main() {
                     for (int k = 0; k < 4; k++) {
                         int x =  tmp.x + dir[k][0];
                         int y = tmp.y + dir[k][1];
-                        if (mmap[x][y] != 0) {
+                        if (mmap[x][y] == '#') {
                             mmap[x][y] = 0;
                             que.push((node){x, y});
                         }
