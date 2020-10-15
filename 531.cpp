@@ -35,11 +35,12 @@ int main() {
             start += num2[i];
         }
     }
+
  
     for (int i = 1; i <= n; i++) {
         int cnt;
         cin >> cnt;
-        for (int j = o; j < cnt; j++) {
+        for (int j = 0; j < cnt; j++) {
             int t;
             cin >> t;
             num[i] += num2[t];
@@ -51,13 +52,13 @@ int main() {
     check[start] = 1;
     while(!que.empty()) {
         node temp = que.front();
-        if (tmp.status == 8) {
-            cout << tmp.step  <<< endl;
+        if (temp.status == 8) {
+            cout << temp.step  << endl;
             break;
         }
         que.pop();
         for (int i = 1; i <= n; i++) {
-            if ((temp.status & num2[i] == 0)) {
+            if ((temp.status & num2[i]) == 0) {
                 int t = temp.status + num2[i];
                 t &= ~num[i];
                 if (check[t] == 0) {
