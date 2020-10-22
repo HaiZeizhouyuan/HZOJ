@@ -16,7 +16,7 @@ int times[max_n + 5];
 int main() {
     int n;
     cin >> n;
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         cin >> times[i];
     }
     init(n, times);
@@ -25,20 +25,20 @@ int main() {
 
 void init(int n, int *times) {
     int alltime = 0;
-    sort(times,times + n);
-    for (int i = n - 1; i >= 0; i -= 2) {
-        if (i == 0) {
-            alltime += times[0]; 
-            break;
-        } else if (i == 1) {
+    sort(times + 1,times + n  + 1);
+    for (int i = n; i > 0; i -= 2) {
+        if (i == 1) {
             alltime += times[1]; 
             break;
         } else if (i == 2) {
-            alltime += times[1] + times[0] + times[2]; 
+            alltime += times[2]; 
+            break;
+        } else if (i == 3) {
+            alltime += times[3] + times[1] + times[2]; 
             break;
         } else {
-            int a = times[1] + times[0] + times[i] + times[1];
-            int b = times[i] + times[0] + times[i - 1] + times[0];
+            int a = times[2] + times[1] + times[i] + times[2];
+            int b = times[i] + times[1] + times[i - 1] + times[1];
             alltime += min(a, b);
         }
     }
