@@ -1,27 +1,38 @@
 /*************************************************************************
 	> File Name: 245.cpp
 	> Author: zhouyuan
-	> Mail: 
-	> Created Time: 2020年09月02日 星期三 18时25分43秒
+	> Mail: 3294207721@qq.com 
+	> Created Time: 2020年11月04日 星期三 20时16分04秒
  ************************************************************************/
 
 #include<iostream>
+#include<cstring>
+#include<algorithm>
 #include<cstdio>
-#include <algorithm>
+#include<queue>
+#include <cmath>
 using namespace std;
  
-#define max_n 100000
+#define MAX_N 100000
 
-int  num[max_n + 5];
-int sum;
+int input[MAX_N + 5];
+
 int main() {
-    int n;
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++) scanf("%d", &num[i]);
-    sort(num, num + n);
-    int x = num[n / 2];
-    for (int i = 0; i < n; i++) sum += abs(num[i] - x);
-    printf("%d\n", sum);
+    int n = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> input[i];
+    //sort(input + 1, input + n + 1);
+    nth_element(input + 1, input + (n + 1) / 2, input + 1 + n);
+    int sum = 0;
+    int mid = input[(n + 1) / 2];
+
+    for (int i = 1; i <= n; i++) {
+        sum += abs(mid-input[i]);
+    }
+
+    cout << sum << endl;
+
+ 
+ 
     return 0;
 }
-
