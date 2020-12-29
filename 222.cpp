@@ -2,29 +2,24 @@
 	> File Name: 222.cpp
 	> Author: zhouyuan
 	> Mail: 3294207721@qq.com 
-	> Created Time: 2020年12月26日 星期六 19时49分51秒
+	> Created Time: 2020年12月29日 星期二 20时10分43秒
  ************************************************************************/
 
-
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <queue>
-#include <stack>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <vector>
-#include <cstdint>
-#include <climits>
+#include<iostream>
+#include<cstring>
+#include<algorithm>
+#include<cstdio>
+#include<queue>
+#include<vector>
+#include<cstdint>
+#include<climits>
 using namespace std;
 #define MAX_N 10000
 
 struct {
     int max_num;
-    int l, r;
 } tree[MAX_N << 2];
+
 int arr[MAX_N + 5];
 
 void update(int ind) {
@@ -33,11 +28,10 @@ void update(int ind) {
 }
 
 void build_tree(int ind, int l, int r) {
-    tree[ind].l = l, tree[ind].r = r;
     if (l == r) {
         tree[ind].max_num = arr[l];
-        return ;
-    }
+        return;
+    };
     int mid = (l + r) >> 1;
     build_tree(ind * 2, l, mid);
     build_tree(ind * 2 + 1, mid + 1, r);
@@ -52,7 +46,7 @@ void modify(int ind, int l, int r, int k, int val) {
     }
     int mid = (l + r) >> 1;
     if (k <= mid) {
-        modify(ind << 1,l, mid,  k, val);
+        modify(ind << 1, l, mid,  k, val);
     } else {
         modify(ind << 1 | 1, mid + 1, r, k, val);
     }
@@ -70,7 +64,7 @@ int query(int ind, int l, int r, int x, int y) {
         ans = max(ans, query(ind << 1,l, mid, x, y));
     }
     if (mid < y) {
-        ans = max(ans, query(ind << 1 | 1, mid + 1, r,  x, y));
+        ans = max(ans, query(ind << 1 | 1, mid + 1, r, x, y));
     }
     return ans;
 }
@@ -81,20 +75,22 @@ int main() {
     for (int i = 1; i <= n; i++) {
         scanf("%d", arr + i);
     }
+
     build_tree(1, 1, n);
+    
     for (int i = 0; i < m; i++) {
         scanf("%d%d%d", &a, &b, &c);
-        switch (a) {
-            case 1: modify(1, 1, n, b, c); break;
-            case 2: {
+        switch(a) {
+            case 1:modify(1,1, n, b, c); break;
+            case 2:{
                 if (b > c) {
                     cout << "-2147483648" << endl;
                     break;
                 }
-                printf("%d\n", query(1, 1, n, b, c)); 
+                printf("%d\n", query(1, 1, n, b, c));
             } break;
         }
     }
+ 
     return 0;
 }
-
