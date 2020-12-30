@@ -1,8 +1,8 @@
 /*************************************************************************
-	> File Name: 223.cpp
+	> File Name: 223_3.cpp
 	> Author: zhouyuan
 	> Mail: 3294207721@qq.com 
-	> Created Time: 2020年12月29日 星期二 21时39分54秒
+	> Created Time: 2020年12月30日 星期三 20时19分56秒
  ************************************************************************/
 
 #include<iostream>
@@ -12,12 +12,12 @@
 #include<queue>
 #include<vector>
 using namespace std;
-#define MAX_N 10000
-#define define_mid long long mid = (l + r) >> 1
 
+#define MAX_N 10000
+#define define_mid long long mid = (l + r) >> 1;
 struct tree{
     long long sum, tag;
-}tree[MAX_N << 2];
+} tree[MAX_N << 2];
 
 long long arr[MAX_N + 5];
 
@@ -31,6 +31,7 @@ void build_tree(long long ind, long long l, long long r) {
         tree[ind].sum = arr[l];
         return ;
     }
+
     define_mid;
     build_tree(ind << 1, l, mid);
     build_tree(ind << 1 | 1, mid + 1, r);
@@ -56,18 +57,19 @@ void modify(long long ind, long long l, long long r, long long x, long long y, l
         tree[ind].sum += val * (r - l + 1);
         tree[ind].tag += val;
         return ;
-    } 
+    }
     down(ind, l, r);
     define_mid;
     if (mid >= x) {
         modify(ind << 1, l, mid, x, y, val);
-    }
+    } 
     if (mid < y) {
         modify(ind << 1 | 1, mid + 1, r, x, y, val);
     }
     update(ind);
     return ;
 }
+
 
 long long query(long long ind, long long l, long long r, long long x, long long y) {
     if (x <= l && r <= y) {
@@ -80,24 +82,27 @@ long long query(long long ind, long long l, long long r, long long x, long long 
     if (mid >= x) {
         ans += query(ind << 1, l, mid, x, y);
     }
-    if (mid < y) {
+
+    if(mid < y) {
         ans += query(ind << 1 | 1, mid + 1, r, x, y);
     }
     return ans;
 }
 
-
 int main() {
     long long n, m;
     scanf("%lld%lld", &n, &m);
+
     for (int i = 1; i <= n; i++) {
         scanf("%lld", arr + i);
     }
+
     build_tree(1, 1, n);
+    
     long long a, b, c, d;
     for (int i = 0; i < m; i++) {
         scanf("%lld%lld%lld", &a, &b, &c);
-        switch(a){
+        switch(a) {
             case 1: {
                 scanf("%lld", &d);
                 modify(1, 1, n, b, c, d);
@@ -108,7 +113,7 @@ int main() {
                     break;
                 }
                 printf("%lld\n", query(1, 1, n, b, c));
-            } break;
+            }break;
         }
     }
     return 0;

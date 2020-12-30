@@ -1,8 +1,8 @@
 /*************************************************************************
-	> File Name: 223.cpp
+	> File Name: 223_2.cpp
 	> Author: zhouyuan
 	> Mail: 3294207721@qq.com 
-	> Created Time: 2020年12月29日 星期二 21时39分54秒
+	> Created Time: 2020年12月30日 星期三 19时39分00秒
  ************************************************************************/
 
 #include<iostream>
@@ -13,7 +13,7 @@
 #include<vector>
 using namespace std;
 #define MAX_N 10000
-#define define_mid long long mid = (l + r) >> 1
+#define define_mid long long mid = (l + r) >> 1;
 
 struct tree{
     long long sum, tag;
@@ -56,7 +56,7 @@ void modify(long long ind, long long l, long long r, long long x, long long y, l
         tree[ind].sum += val * (r - l + 1);
         tree[ind].tag += val;
         return ;
-    } 
+    }
     down(ind, l, r);
     define_mid;
     if (mid >= x) {
@@ -101,15 +101,16 @@ int main() {
             case 1: {
                 scanf("%lld", &d);
                 modify(1, 1, n, b, c, d);
-            } break;
+            }break;
             case 2: {
                 if (b > c) {
                     printf("0\n");
                     break;
                 }
                 printf("%lld\n", query(1, 1, n, b, c));
-            } break;
+            }break;
         }
     }
+ 
     return 0;
 }
