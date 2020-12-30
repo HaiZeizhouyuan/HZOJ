@@ -2,32 +2,40 @@
 	> File Name: 223.cpp
 	> Author: zhouyuan
 	> Mail: 3294207721@qq.com 
-	> Created Time: 2020年12月26日 星期六 20时29分43秒
+	> Created Time: 2020年12月29日 星期二 21时39分54秒
  ************************************************************************/
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <queue>
-#include <stack>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <vector>
+#include<iostream>
+#include<cstring>
+#include<algorithm>
+#include<cstdio>
+#include<queue>
+#include<vector>
 using namespace std;
 #define MAX_N 10000
 #define define_mid long long mid = (l + r) >> 1
 
-long long flag = 0;
 
-struct {
+struct tree{
     long long sum, tag;
-} tree[MAX_N << 2];
+}tree[MAX_N << 2];
+
 long long arr[MAX_N + 5];
 
 void update(long long ind) {
     tree[ind].sum = tree[ind << 1].sum + tree[ind << 1 | 1].sum;
+    return ;
+}
+
+void build_tree(long long ind, long long l, long long r) {
+    if (l == r) {
+        tree[ind].sum = arr[l];
+        return ;
+    }
+    define_mid;
+    build_tree(ind << 1, l, mid);
+    build_tree(ind << 1 | 1, mid + 1, r);
+    update(ind);
     return ;
 }
 
@@ -44,27 +52,12 @@ void down(long long ind, long long l, long long r) {
     return ;
 }
 
-void build_tree(long long ind, long long l, long long r) {
-    if (l == r) {
-        tree[ind].sum = arr[l];
-        return ;
-    }
-    define_mid;
-    build_tree(ind << 1, l, mid);
-    build_tree(ind << 1 | 1, mid + 1, r);
-    update(ind);
-    return ;
-}
-
 void modify(long long ind, long long l, long long r, long long x, long long y, long long val) {
-    flag && printf("modify(%lld, %lld, %lld) : %lld, %lld, %lld, %lld\n",
-        x, y, val, ind, l, r, tree[ind].sum
-    );
     if (x <= l && r <= y) {
         tree[ind].sum += val * (r - l + 1);
         tree[ind].tag += val;
         return ;
-    }
+    } 
     down(ind, l, r);
     define_mid;
     if (mid >= x) {
@@ -78,12 +71,10 @@ void modify(long long ind, long long l, long long r, long long x, long long y, l
 }
 
 long long query(long long ind, long long l, long long r, long long x, long long y) {
-    flag && printf("query(%lld, %lld) : %lld, %lld, %lld, %lld\n",
-        x, y, ind, l, r, tree[ind].sum
-    );
     if (x <= l && r <= y) {
         return tree[ind].sum;
     }
+
     down(ind, l, r);
     define_mid;
     long long ans = 0;
@@ -96,17 +87,18 @@ long long query(long long ind, long long l, long long r, long long x, long long 
     return ans;
 }
 
+
 int main() {
     long long n, m;
     scanf("%lld%lld", &n, &m);
-    for (long long i = 1; i <= n; i++) {
+    for (int i = 1; i <= n; i++) {
         scanf("%lld", arr + i);
     }
     build_tree(1, 1, n);
     long long a, b, c, d;
-    for (long long i = 0; i < m; i++) {
+    for (int i = 0; i < m; i++) {
         scanf("%lld%lld%lld", &a, &b, &c);
-        switch (a) {
+        switch(a){
             case 1: {
                 scanf("%lld", &d);
                 modify(1, 1, n, b, c, d);
@@ -120,6 +112,6 @@ int main() {
             } break;
         }
     }
+     
     return 0;
 }
-
