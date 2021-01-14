@@ -53,7 +53,7 @@ int main() {
         }
     }
     for (int i = 0; i < k; i++) {
-                    cout << f[i] << endl;
-                }
+        cout << f[i] << endl;
+    }
     return 0;
 }
