@@ -28,7 +28,7 @@ bool is_valid(int *a, int n) {
 }
 
 
-int main() {
+nt main() {
     int n, ans = 20;
     cin >> n;
     for (int i = 0; i < n; i++) a[i] = i + 1;

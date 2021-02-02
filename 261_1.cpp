@@ -15,70 +15,70 @@
 #include <stack>
 using namespace std;
  
-class NewStruct{
+class DataStruct{
 public:
-    NewStruct() {
+    DataStruct() {
         sum[0] = 0;
         ans[0] = INT64_MIN;
     }
     void insert(long long x);
-    void del();
+    void erase();
     void move_left();
     void move_right();
     long long query(long long k);
 private:
-    stack<long long> s1, s2;
+    stack<long long> sta1, sta2;
     long long sum[1005];
     long long ans[1005];
 };
 
-void NewStruct::insert(long long x) {
-    s1.push(x);
-    int ind = s1.size();
-    sum[ind]= x + sum[ind - 1]; 
+void DataStruct::insert(long long val) {
+    sta1.push(val);
+    int ind = sta1.size();
+    sum[ind]= val + sum[ind - 1]; 
     ans[ind] = max(ans[ind - 1], sum[ind]);
     return ;
 }
 
-void NewStruct::del() {
-    if (s1.empty()) return ;
-    s1.pop();
+void DataStruct::erase() {
+    if (sta1.empty()) return ;
+    sta1.pop();
     return ;
 }
 
-void NewStruct::move_left(){
-    if (s1.empty()) return;
-    s2.push(s1.top());
-    del();
+void DataStruct::move_left(){
+    if (sta1.empty()) return;
+    sta2.push(sta1.top());
+    erase();
     return ;
 }
 
-void NewStruct::move_right(){
-    if (s2.empty()) return ;
-    insert(s2.top());
-    s2.pop();
+void DataStruct::move_right(){
+    if (sta2.empty()) return ;
+    insert(sta2.top());
+    sta2.pop();
     return ;
 }
 
-long long NewStruct::query(long long k) {
-    return ans[k];
+long long DataStruct::query(long long ind) {
+    return ans[ind];
 }
 
 int main() {
     long long n;
     cin >> n;
-    string op;
+    string ope;
     long long  val;
-    NewStruct s;
+    DataStruct s;
     for (int i = 0; i < n; i++) {
-        cin >> op;
-        switch(op[0]) {
+        cin >> ope;
+        switch(ope[0]) {
             case 'I': {
                 cin >> val;
                 s.insert(val);
             } break;
             case 'D': {
-                s.del();
+                s.erase();
             } break;
             case 'L': {
                 s.move_left(); 
