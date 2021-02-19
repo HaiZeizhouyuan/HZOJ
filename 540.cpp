@@ -29,8 +29,8 @@ int main() {
         for (int i = 0; i < n; i++) {
             cin >> nums[i];
         }
-        func(0, 0, n / 2);
-        func(1, n / 2, n);
+        func(0, 0, n / 2);//第零组数据
+        func(1, n / 2, n);//第一组数据
         sort(ans[1], ans[1] + mark[1]);
         int flag = 0;
         for (int i = 0; i < mark[0]; i++) {

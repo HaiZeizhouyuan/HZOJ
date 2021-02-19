@@ -25,7 +25,7 @@ void func(int x, int y, int n) {
 
 int main () {
     for (int i = 2; i <= 7; i++) {
-        num[i] = num[i - 1] * 3;
+        num[i] = num[i - 1] * 3;//边长
     }
     func(1, 1, 7);
     int n;

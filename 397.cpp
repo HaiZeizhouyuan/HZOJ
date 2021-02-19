@@ -32,7 +32,7 @@ int main() {
     }
 
     for (int i = 1; i <= n; i++) {
-        for (int j = 0; j <= m; j++) {
+        for (int j = 1; j <= m; j++) {
             if (mmap[i][j] != 0) {
                 ans += 1;
                 mmap[i][j] = 0;

@@ -58,13 +58,25 @@ int sunday(const char *s, const char *t) {
     }
     return -1;
 }
+
+int shift_and(const char *s, const char *t) {
+    int d[256] = {0}, n = 0;
+    for (int i = 0; t[i]; n++, i++) d[t[i]] |= (1 << i);
+    int p = 0;
+    for (int i = 0; s[i]; i++) {
+        p = (p << 1 | 1) & d[s[i]];
+        if (p & (1 << (n - 1))) return i - n + 1;
+    }
+    return -1;
+}
 int main() {
     char s[100], t[100];
     while(scanf("%s%s", s, t) != EOF) {
         printf("violen_match(%s, %s) = %d\n", s, t, violen_match(s, t));
         printf("kmp(%s, %s) = %d\n", s, t, kmp(s, t));
         printf("sunday(%s, %s) = %d\n", s, t, sunday(s, t));
+        printf("shift_and(%s, %s) = %d\n",s, t, shift_and(s, t));
+        cout << endl;
     }
- 
     return 0;
 }

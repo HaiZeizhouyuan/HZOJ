@@ -1,8 +1,8 @@
 /*************************************************************************
-	> File Name: 275_1.cpp
+	> File Name: 275_4.cpp
 	> Author: zhouyuan
 	> Mail: 3294207721@qq.com 
-	> Created Time: 2021年02月03日 星期三 23时50分41秒
+	> Created Time: 2021年02月04日 星期四 09时29分02秒
  ************************************************************************/
 
 #include<iostream>
@@ -14,45 +14,59 @@
 using namespace std;
 #define MAX_N 1000000
 #define P 1000007
-#define base 13
+#define base 163
 
-long long H[MAX_N + 5];
-long long K[MAX_N + 5];//base的i次幂的值
-long long inv[MAX_N + 5];
 char s[MAX_N + 5];
+long long inv[MAX_N + 5];
+long long BASE[MAX_N + 5];
+long long H[MAX_N + 5];
 
-void init() {
+void set_inv() {
     inv[1] = 1;
-    for (long long i = 2; i < P; i++) {
-        inv[i] = ((-P / i) * inv[P % i] % P + P) % P;
+    for (long long x = 2; x <= P; x++) {
+        inv[x] = (-(P / x) * inv[P % x] % P + P) % P;
     }
-    K[0] = 1;
+    return ;
+}
+
+void set_base() {
+    BASE[0] = 1;
     for (long long i = 1; i <= MAX_N; i++) {
-        K[i] = (K[i - 1] * base) % P;
+        BASE[i] = (BASE[i - 1] * base) % P;
     }
-    
+}
+
+inline void init() {
+    set_inv();
+    set_base();
+}
+
+void set_H() {
     H[0] = 0;
     for (long long i = 1; s[i]; i++) {
-        H[i] = ((H[i - 1] + K[i] * (s[i] -  'a'))) % P;
+        H[i] = ((H[i - 1] + BASE[i] * (s[i] - 'a'))) % P;
     }
     return ;
 }
 
 long long getH(long long l, long long r) {
-    return ((H[r] - H[l - 1]) % P * inv[K[l]] % P + P ) % P;
+    return ((H[r] - H[l - 1]) % P * inv[BASE[l]] % P + P) % P;
 }
 
 long long isSame(long long i, long long j, long long n) {
     for (long long k = 0; k < n; k++) {
-        if (s[i + k] - s[j + k]) return false;
+        if(s[i + k] - s[j + k]) return false;
     }
     return true;
 }
 
+
+
 int main() {
-    scanf("%s", s + 1);
-    long long m, l1, l2, r1, r2;
     init();
+    scanf("%s", s + 1);
+    set_H();
+    long long m, l1, r1, l2, r2;
     scanf("%lld", &m);
     for (long long i = 0; i < m; i++) {
         scanf("%lld%lld%lld%lld", &l1, &r1, &l2, &r2);
@@ -62,13 +76,14 @@ int main() {
         if (n1 - n2 || val1 - val2) {
             printf("No\n");
         } else {
-            if (isSame(l1, l2, n1)) {
+            if(isSame(l1, l2, n1)) {
                 printf("Yes\n");
             } else {
                 printf("No\n");
             }
         }
-        
     }
+    
+ 
     return 0;
 }
