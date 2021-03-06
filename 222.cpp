@@ -16,12 +16,12 @@
 using namespace std;
 #define MAX_N 10000
 
-struct {
+typedef struct tree{
     int max_num;
-} tree[MAX_N << 2];
+}Tree;
 
-int arr[MAX_N + 5];
-
+vector<int> arr;
+vector<Tree> tree(MAX_N << 2);
 void update(int ind) {
     tree[ind].max_num = max(tree[ind << 1].max_num, tree[ind << 1 | 1].max_num);
     return ;
@@ -63,7 +63,7 @@ int query(int ind, int l, int r, int x, int y) {
     if (mid >= x) {
         ans = max(ans, query(ind << 1,l, mid, x, y));
     }
-    if (mid < y) {
+    if (mid  + 1 <= y) {
         ans = max(ans, query(ind << 1 | 1, mid + 1, r, x, y));
     }
     return ans;
@@ -71,9 +71,13 @@ int query(int ind, int l, int r, int x, int y) {
 
 int main() {
     int n, m, a, b, c;
-    scanf("%d%d", &n, &m);
+    cin >> n >> m;
+    arr.emplace_back(0);
     for (int i = 1; i <= n; i++) {
-        scanf("%d", arr + i);
+        int temp;
+        cin >> temp;
+        arr.emplace_back(temp);
+        //scanf("%d", arr + i);
     }
 
     build_tree(1, 1, n);
